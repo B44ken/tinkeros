@@ -1,0 +1,20 @@
+<script>
+var msgIndex = 0
+var appIndex = undefined
+const system = (message) => {
+    msgIndex++
+    window.postMessage({
+           app: appIndex, msg: msgIndex, ...message
+    })
+}
+onmessage = (message) => {
+    if(message.from = "*ROOT") {
+        document.write(JSON.stringify(message.data))
+        if(appIndex == undefined) {
+            appIndex = message.data.appIndex
+            console.log(message.data)
+            return
+        }
+    }
+}
+</script>

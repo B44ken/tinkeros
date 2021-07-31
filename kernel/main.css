@@ -1,0 +1,14 @@
+body {
+    margin: 0;
+}
+
+iframe {
+    border: none;
+    display: none;
+}
+
+.desktop {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
