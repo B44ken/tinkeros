@@ -1,20 +1,29 @@
 <script>
 var msgIndex = 0
 var appIndex = undefined
+const secureApps = ["*ROOT"]
 const system = (message) => {
+    // if (typeof message == "string") {
+    //     message = { message }
+    // }
     msgIndex++
-    window.postMessage({
-           app: appIndex, msg: msgIndex, ...message
-    })
+    var e = new CustomEvent('system', { detail: message })
+    window.parent.document.dispatchEvent(e)
 }
-onmessage = (message) => {
-    if(message.from = "*ROOT") {
-        document.write(JSON.stringify(message.data))
-        if(appIndex == undefined) {
-            appIndex = message.data.appIndex
-            console.log(message.data)
+window.addEventListener("system", (event) => {
+    const detail = event.detail
+    if(secureApps.includes(detail.from)) {
+        console.info(detail)
+        if(appIndex == undefined && detail.appIndex) {
+            appIndex = detail.appIndex
+            secureApps.push(appIndex)
             return
         }
+        if(window.handleMessage) 
+            handleMessage(detail.data)
+        // the first message will contain important data
+        // app index, parent elements, etc.
     }
-}
+})
+    
 </script>

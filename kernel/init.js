@@ -1,15 +1,13 @@
-import '/kernel/system.js'
+// import '/kernel/system.js'
 
 const DOMMain = document.body.getElementsByTagName("main")[0]
 
 class App {
-    constructor(path) {
+    constructor(path, parent) {
         this.path = path
         this.id = App.makeHash()
         this.iframe = document.createElement("iframe")
         this.iframe.id = this.id
-        this.iframe.width = innerWidth
-        this.iframe.height = innerHeight
         console.debug(`launched app from ${this.path} with id ${this.id}`)
 
         if(this.path.endsWith('.js')) {
@@ -30,16 +28,19 @@ class App {
                         this.iframe.contentDocument.write(text)
                 })
         })
-        DOMMain.appendChild(this.iframe)
+        parent.appendChild(this.iframe)
+
+        processes[this.id] = this
     }
     showWindow() {
         this.iframe.style = "width: 400px; height: 300px; display: block;"
     }
     sendMessage(msg) {
-            this.iframe.contentWindow.postMessage({
-                ...msg,
-                from: "*ROOT"
-            })
+        if (typeof msg == "string") {
+            msg = { msg: msg }
+        }
+        var e = new CustomEvent('system', {...msg, from: "*ROOT"})
+        this.iframe.dispatchEvent(e)
     }
     static makeHash() {
         const chars = '1234567890abcdefghijklmnopqrstuv'
@@ -50,7 +51,9 @@ class App {
     }
 }
 
-var desktop = new App('/slash/desktop/', {"rights": ["$ALL$"]})
+var processes = {}
+
+var desktop = new App('/slash/desktop/', DOMMain)
 desktop.iframe.classList.add('desktop')
-desktop.sendMessage({text: 'this is desktop'})
+desktop.sendMessage({})
 eval("window.desktop = desktop")

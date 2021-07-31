@@ -10,10 +10,18 @@
     <link rel="stylesheet" href="/slash/desktop/main.css">
     <div>
         <input type="text" id="input">
-        <button onclick="eval(document.getElementById('input').value)">O</button>    
+        <button onclick="send()">O</button>    
     </div>
    <script>
         var input = document.getElementById("input")
+        const send = () => {
+            eval(input.value)
+        }
+        
+        var terminalID = system({x: 'start', 'appDir': '/slash/terminal/', 'graphical': true})
+        console.log(terminal)
+        var terminal = system({'command': 'get', 'id': terminalID})
+        system({x: "myId"})
     </script>
     <style>
         div {
