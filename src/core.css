@@ -4,6 +4,8 @@
     height: 400px;
     width: 600px;
     border: 1px solid black;
+    resize: both;
+    background: #fff;
 }
 
 body {
@@ -14,7 +16,8 @@ body {
 
 .fullscreen {
     z-index: 1;
+    margin: 0;
     border: none;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 }

@@ -1,14 +1,7 @@
-import { ProcessManager, Process, URLProcess } from './manager.js';
+import { ProcessManager } from '/util/manager.js'
 
-export const manager = new ProcessManager()
-
-const desktop = new URLProcess('desktop')
-manager.setFullscreen(desktop)
-
-
-;(async () => {
-    await desktop.windowLoaded()
-})()
-
-// const example = new URLProcess('https://example.com')
-// manager.makeWindow(example)
+const manager = new ProcessManager(document.body)
+const env = localStorage.desktopEnvironment || '/desktop'
+const desktop = manager.Process('url::' + env)
+desktop.setRibbon(false)
+manager.setFullscreen(desktop, true)

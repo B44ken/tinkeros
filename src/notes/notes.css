@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+}
+
+pre {
+    height: 304px;
+    width: 100%;
+    font-size: 18px;
+}
+
+h1 {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+}

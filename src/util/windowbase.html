@@ -1,43 +1,9 @@
-<html>
-    <head>
-        <style>
-            body {
-                margin: 0;
-            }
-            nav {
-                width: 100vw;
-                height: 28px;
-                background: #ccc;
-                overflow: hidden;
-            }
-            span {
-                font-size: 20px;
-                padding-left: 16px;
-            }
-            button {
-                float: right;
-                padding: 0px;
-                width: 28px;
-                height: 28px;
-            }
-            iframe {
-                height: calc(100vh - 32px);
-                width: 100vw;
-                border: none;
-            }
-            body.no-ribbon iframe {
-                height: 100vh;
-            }
-            body.no-ribbon nav {
-                display: none;
-            }
-        </style>
-    </head>
-    <body>
-        <nav>
-            <span>tinkerOS Window</span>
-            <button onclick="handle.killSelf()">x</button>
-        </nav>
-        <iframe></iframe>
-    </body>
-</html>
+<link rel="stylesheet" href="/util/windowbase.css"> 
+<nav class="can-move"> 
+        <span>tinkerOS Window</span>
+        <button onclick="this.parentElement.parentElement.remove()">x</button>
+        <button class="can-fullscreen">+</button>
+</nav> 
+<iframe></iframe>
+<footer></footer>
+<button class="can-resize">o</button>
