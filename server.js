@@ -5,7 +5,7 @@ http.createServer((req, res) => {
     const mimeTypes = {
         "js": "text/javascript",
     }
-    var url = req.url.replace('/', './src/')
+    var url = req.url.replace('/', './')
     if(!req.url.includes('.')) url += "/index.html"
     const extension = req.url.split('.')[1]
     const thisMime = mimeTypes[extension]
