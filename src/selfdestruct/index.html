@@ -3,9 +3,9 @@
     setInterval(() => handle.setTitle("self destruct demo"), 1)
 
     const p = document.querySelector('p')
-    let count = 30
+    let count = 2
     setInterval(() => {
-        if(count == 0) handle.destroyWindow()
+        if(count == 0) handle.exit()
         p.textContent = `window self destructs in ${count} seconds`
         count--
     }, 1000)

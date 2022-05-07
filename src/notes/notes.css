@@ -2,10 +2,10 @@ body {
     margin: 0;
 }
 
-pre {
+textarea {
     height: 304px;
-    width: 100%;
-    font-size: 18px;
+    width: calc(100% - 16px);
+    font-size: 14px;
 }
 
 h1 {

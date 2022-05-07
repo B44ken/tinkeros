@@ -14,7 +14,6 @@ export class ProcessManager {
         process.fs = this.fs
     }
     setFullscreen(desktop, value) {
-        desktop.style = 'position: absolute; top: 0px; left: 0px'
         if(value) desktop.window.classList.add('fullscreen')
         else desktop.window.classList.remove('fullscreen')
     }
@@ -28,19 +27,17 @@ export class ProcessManager {
         const proc = new Process()
         proc.window = document.createElement('div')
         this.root.appendChild(proc.window)
+        this.movement.bindMoveable(proc.window) 
         proc.window.classList.add('process')
-        proc.passUp({
-            "fs": this.fs,
-            "root": this.root,
-            "Process": this.Process
-        })
+        proc.fs = this.fs
+        proc.Process = this.Process
+        proc.root = this.root
+        proc.movement = this.movement
         proc.loadFrame().then(async () => {
             proc.frame.onload = () =>
                 proc.frame.contentWindow.handle = proc
                 proc.frame.srcdoc = await this.fs.read(file)
             })
-        if(this.movement)
-            this.movement.bindMoveable(proc.window)
         return proc
     }
 }
@@ -61,20 +58,15 @@ export class Process {
             }, 1)
         })
     }
-    passUp(object) {
-        for(var key of Object.keys(object))
-        this[key] = object[key]
-    }
     setRibbon(visible) {
         if(visible) this.window.id = ''
         else this.window.id = 'no-ribbon'
     }
     setTitle(title) {
-        this.window.querySelector('span').innerText = title
+        this.window.querySelector('.title').innerText = title
     }
-    destroyWindow(target) {
-        // only works for this specific parent depth
-        target.parentElement.parentElement.remove()
+    exit() {
+        this.window.remove()
     }
 }
 

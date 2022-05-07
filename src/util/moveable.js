@@ -16,6 +16,7 @@ export class MovementManager {
         if(event == null) return
         for(var el of event.composedPath()) {
             if(el.classList?.value.includes("process")) {
+                el.classList.remove("fullscreen")
                 this.current = el
                 break
             }

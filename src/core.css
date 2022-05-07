@@ -18,6 +18,9 @@ body {
     z-index: 1;
     margin: 0;
     border: none;
-    width: 100vw;
-    height: 100vh;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 0 !important;
 }
