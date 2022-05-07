@@ -18,11 +18,6 @@ export class ProcessManager {
         else desktop.window.classList.remove('fullscreen')
     }
 
-    URLProcess(url) {
-        const proc = new URLProcess(url)
-        return proc
-    }
-
     Process(file) {
         const proc = new Process()
         proc.window = document.createElement('div')
@@ -36,15 +31,15 @@ export class ProcessManager {
         proc.loadFrame().then(async () => {
             proc.frame.onload = () =>
                 proc.frame.contentWindow.handle = proc
-                proc.frame.srcdoc = await this.fs.read(file)
-            })
+            proc.frame.srcdoc = await this.fs.read(file)
+        })
         return proc
     }
 }
 
 export class Process {
-    async loadFrame() {
-        var windowBase = await fetch('/util/windowbase.html')
+    async loadFrame(container="/util/windowbase.html") {
+        var windowBase = await fetch(container)
         windowBase = await windowBase.text()
         this.window.innerHTML = windowBase
 
@@ -67,19 +62,5 @@ export class Process {
     }
     exit() {
         this.window.remove()
-    }
-}
-
-export class URLProcess extends Process {
-    constructor(url) {
-        super()
-        this.windowLoaded().then(() => this.frame.src = url )
-    }
-}
-
-export class StringProcess extends Process {
-    constructor(string) {
-        super()
-        this.windowLoaded().then(() => this.frame.contentDocument.write(string) )
     }
 }

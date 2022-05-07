@@ -1,12 +1,12 @@
 <p></p>
 <script>
-    setInterval(() => handle.setTitle("self destruct demo"), 1)
+    setTimeout(() => handle.setTitle("exit demo"), 1)
 
     const p = document.querySelector('p')
-    let count = 2
+    let count = 15
     setInterval(() => {
-        if(count == 0) handle.exit()
-        p.textContent = `window self destructs in ${count} seconds`
-        count--
-    }, 1000)
+        p.textContent = `exiting in ${count.toPrecision(2)} seconds`
+        count -= 0.1
+        if(count < 0) handle.exit()
+    }, 100)
 </script>

@@ -1,16 +1,16 @@
-import { ProcessManager, URLProcess, StringProcess } from '/util/manager.js'
+import { ProcessManager } from '/util/manager.js'
 
 const manager = new ProcessManager(document.body)
 
 const apps = ["notes", "selfdestruct"]
 
 for(var app of apps) {
-    let anchor = document.createElement("a")
-    anchor.textContent = app
-    anchor.style = "display: block"
-    anchor.addEventListener("click", el => {
+    let link = document.createElement("button")
+    link.textContent = app
+    link.style = "display: block"
+    link.addEventListener("click", el => {
         var text = el.composedPath()[0].textContent
-        manager.Process("url::/" + text)
+        manager.Process("url::" + text)
     })
-    document.body.appendChild(anchor)
+    document.body.appendChild(link)
 }
