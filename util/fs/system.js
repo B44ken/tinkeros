@@ -1,4 +1,4 @@
-import { storageFS, rawFS, urlFS } from '/util/fs/basefs.js'
+import { storageFS, rawFS, urlFS } from './basefs.js'
 
 class IOError extends Error {
     constructor(message) {
@@ -36,6 +36,9 @@ export class FileSystem {
     }
     async append(path, drive, content) {
         return this.io(path, drive, content, "append")
+    }
+    async list(path, drive) {
+        return this.io(path, drive, null, "list")
     }
     async makeBlob(path, drive) {
         const content = await this.read(path, drive)

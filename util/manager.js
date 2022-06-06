@@ -1,5 +1,5 @@
-import { FileSystem } from "/util/fs/system.js"
-import { MovementManager } from "/util/moveable.js"
+import { FileSystem } from "./fs/system.js"
+import { MovementManager } from "./moveable.js"
 
 export class ProcessManager {
     constructor(el) {
@@ -38,7 +38,7 @@ export class ProcessManager {
 }
 
 export class Process {
-    async loadFrame(container="/util/windowbase.html") {
+    async loadFrame(container="./util/windowbase.html") {
         var windowBase = await fetch(container)
         windowBase = await windowBase.text()
         this.window.innerHTML = windowBase

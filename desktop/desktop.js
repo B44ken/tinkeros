@@ -1,4 +1,4 @@
-import { ProcessManager } from '/util/manager.js'
+import { ProcessManager } from '../util/manager.js'
 
 const manager = new ProcessManager(document.body)
 

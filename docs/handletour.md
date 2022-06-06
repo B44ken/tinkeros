@@ -20,11 +20,13 @@ setTimeout(async () => {
     await handle.fs.read("storage::hello")
 
     // implement your own drive, like a random number generator
-    // this could be a class too, as long as it implements read write and append
+    // this could be a class too
+    // all methods are optional
     handle.fs.mount("urandom", {
         "read": (path) => Math.random(),
-        "write": (path, content) => null,
-        "append": (path, content) => null
+        // "write": (path, content) => null,
+        // "append": (path, content) => null,
+        // "list": (path) => null
     })
 
     // create a new process - should display 0.234432411 or similar

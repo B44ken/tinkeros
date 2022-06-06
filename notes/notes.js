@@ -1,4 +1,8 @@
-setTimeout(() => {
+const handleWait = setTimeout(() => {
+    if(!window.handle) {
+        return
+    } 
+    clearInterval(handleWait)
     handle.setTitle('notes')
 }, 1)
 
