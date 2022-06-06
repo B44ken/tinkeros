@@ -1,4 +1,4 @@
-import { ProcessManager } from '../util/manager.js'
+import { ProcessManager } from '../../../util/manager.js'
 
 const manager = new ProcessManager(document.body)
 
@@ -10,7 +10,7 @@ for(var app of apps) {
     link.style = "display: block"
     link.addEventListener("click", el => {
         var text = el.composedPath()[0].textContent
-        manager.Process("url::" + text)
+        manager.Process("url::apps/" + text)
     })
     document.body.appendChild(link)
 }
